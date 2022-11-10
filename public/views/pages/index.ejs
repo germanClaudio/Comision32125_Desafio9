@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <%- include('../partials/head'); %>
+</head>
+
+<body>
+    <header>
+        <%- include('../partials/header'); %>
+    </header>
+    <h3 class="d-block mx-auto my-2 text-center">Load your Products</h3>
+    <%- include('../partials/formulario'); %>
+        <br>
+        <h3 class="d-block mx-auto my-2 text-center">History</h3>
+        <div class="d-block mx-auto mb-3 text-center w-75">
+            <%- include('../partials/dataTable'); %>
+        </div>
+        <hr>
+        <%- include('../partials/formularioChat'); %>
+            <br>
+            <%- include('../partials/dataMsg'); %>
+                <br>
+
+                <%- include('../partials/footer'); %>
+
+                    <!--    scripts     -->
+                    <script type="text/javascript" src="../../index.js"></script>
+</body>
+
+</html>

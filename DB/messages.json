@@ -1,0 +1,38 @@
+[
+     {
+        "author": {
+          "id": "towers@boolean.com",
+          "nombre": "Peter",
+          "apellido": "Kantropus",
+          "edad": 25,
+          "alias": "Bragueta Salvaje",
+          "avatar": "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/1206.jpg"
+        },
+        "text": "Funciona!!! Que grande que soyyyyy"
+      },
+      {
+        "author": {
+          "id": "g-remal@gmail.com",
+          "nombre": "Remal",
+          "apellido": "Malardo",
+          "edad": 33,
+          "alias": "Loma del ogt",
+          "avatar": "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/1000.jpg"
+        },
+        "text": "siiiiiiii te fuiste a la B"
+      },
+      {
+        "author": {
+          "id": "manolo@hotmail.com",
+          "nombre": "Manolo",
+          "apellido": "Galvan",
+          "edad": 40,
+          "alias": "Hachazo en el barro",
+          "avatar": "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/206.jpg"
+        },
+        "text": "Creo que lo logre!!!!!" 
+      }
+    ]
+ 
+
+      
