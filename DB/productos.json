@@ -22,23 +22,5 @@
     "price": 172,
     "thumbnail": "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/292.jpg",
     "id": 4
-  },
-  {
-    "title": "Inteligente Acero Mesa",
-    "price": 124,
-    "thumbnail": "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/1034.jpg",
-    "id": 5
-  },
-  {
-    "title": "Fantástico Granito Toallas",
-    "price": 92,
-    "thumbnail": "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/659.jpg",
-    "id": 6
-  },
-  {
-    "title": "Plastico",
-    "price": 177,
-    "thumbnail": "http://localhost:8082/Perfume_3.jpg",
-    "id": 7
   }
 ]

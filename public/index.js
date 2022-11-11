@@ -1,52 +1,86 @@
 const socket = io.connect()
-const { normalizar, denormalize, schema } = require('normalizr')
 
 // ----------  Messages ----------------
-socket.on('mensajesAll', async (data) => {
-    //console.log('Data mensaje: ' + data )
-    render( await data)
+/* --------------------- DESNORMALIZACIÓN DE MENSAJES ---------------------------- */
+// Definimos un esquema de autor
+const schemaAuthor = new normalizr.schema.Entity('author', {}, { idAttribute: 'id' });
+
+// Definimos un esquema de mensaje
+const schemaMensaje = new normalizr.schema.Entity('post', { author: schemaAuthor }, { idAttribute: '_id' })
+
+// Definimos un esquema de posts
+const schemaMensajes = new normalizr.schema.Entity('posts', { mensajes: [ schemaMensaje ] }, { idAttribute: 'id' })
+
+socket.on('mensajesAll', async (mensajes) => {   //async (data)
+    console.log('Data mensaje: ' + JSON.stringify(mensajes))
+    let mensajesNsize = JSON.stringify(mensajes).length
+    console.log(mensajes, mensajesNsize);
+
+    let mensajesD = normalizr.denormalize(mensajes.result, schemaMensajes, mensajes.entities)
+
+    let mensajesDsize = JSON.stringify(mensajesD).length
+    console.log(mensajesD, mensajesDsize);
+
+    let porcentajeC = parseInt((mensajesNsize * 100) / mensajesDsize)
+    console.log(`Porcentaje de compresión ${porcentajeC}%`)
+    document.getElementById('compressionRate').innerText = `Compression Rate: ${porcentajeC}%`
+
+    const html = makeHtmlList(mensajesD.mensajes)
+    document.getElementById('mostrarMensajes').innerHTML = html;
+    // render(await mensajes)
 })
 
 const addMessage = () => {
-    const author = document.getElementById('author').value
-    const text = document.getElementById('texto').value
-    const nombre = document.getElementById('nombre').value
-    const apellido = document.getElementById('apellido').value
-    const edad = document.getElementById('edad').value
-    const alias = document.getElementById('alias').value
-    const avatar = document.getElementById('avatar').value
-    
-    socket.emit('newMensaje', { author, nombre, apellido, edad, alias, avatar, text })
-
+    const mensaje = {
+        author: {
+            email : document.getElementById('author').value,
+            nombre : document.getElementById('nombre').value,
+            apellido : document.getElementById('apellido').value,
+            edad : document.getElementById('edad').value,
+            alias : document.getElementById('alias').value,
+            avatar : document.getElementById('avatar').value
+        },
+        text: document.getElementById('texto').value
+    }
+    socket.emit('newMensaje', mensaje )
     return false
 }
 
-const render = (data) => {
-    console.log('Render msg..... ' +  JSON.stringify(data))
+function makeHtmlList(mensajes) {
     const date = new Date().toLocaleString('en-GB')
-    
-    const html = data.map((element) => {
-        console.log('Dentro del html mensajes '+ [...data])
+    return mensajes.map((mensaje) => {
         return (`<div class="d-block mx-auto my-1 p-1">
                     <strong class="text-secondary"> Mensaje-> </strong>
-                    <strong class="fw-bold text-primary">${element.author.id}</strong>:
+                    <strong class="fw-bold text-primary">${mensaje.author.email}</strong>:
                     <e id="colorBrown" style="color:brown;">${date} </e>: 
-                    <em id="colorGreen" style="color:MediumSeaGreen;">${element.text}</em>
-                    <img class="img-fluid rounded-circle" alt="avatar" src='${element.author.avatar}' width="60" height="60">
+                    <em id="colorGreen" style="color:MediumSeaGreen;">${mensaje.text}</em>
+                    <img class="img-fluid rounded-circle" alt="avatar" src='${mensaje.author.avatar}' width="60" height="60">
                </div>`)
     }).join(" ")
-
-    document.getElementById('mostrarMensajes').innerHTML = html
-
-    // document.getElementById('author').value = ""
-    document.getElementById('texto').value = ""
 }
 
+// const render = async (arrayMsg) => {
+//     const date = new Date().toLocaleString('en-GB')
+//     console.log('Render msg..... ' +  JSON.stringify(...arrayMsg))
+    
+//     const html = arrayMsg.map((mensaje) => {
+//         console.log('Dentro del html mensajes '+ [...arrayMsg])
+//         return (`<div class="d-block mx-auto my-1 p-1">
+//                     <strong class="text-secondary"> Mensaje-> </strong>
+//                     <strong class="fw-bold text-primary">${mensaje.author.email}</strong>:
+//                     <e id="colorBrown" style="color:brown;">${date} </e>: 
+//                     <em id="colorGreen" style="color:MediumSeaGreen;">${mensaje.text}</em>
+//                     <img class="img-fluid rounded-circle" alt="avatar" src='${mensaje.author.avatar}' width="60" height="60">
+//                </div>`)
+//     }).join(" ")
+
+//     document.getElementById('mostrarMensajes').innerHTML = html
+//     document.getElementById('texto').value = ""
+// }
 
 // --------------  Products ----------------
+
 socket.on('productsAll', async (arrProd) => {
-    // console.log(arrProd)
-    //socket.emit('respuesta', { socketID: data.id, mensaje: data } )
     renderProduct(await arrProd) //await
 })
 
@@ -54,7 +88,6 @@ const addProduct = () => {
     const title = document.getElementById('title').value
     const price = Number(document.getElementById('price').value)
     const thumbnail = document.getElementById('thumbnail').value
-    // console.log(title, price, thumbnail)
     socket.emit('newProducto', { title, price, thumbnail })
 
     return false
@@ -62,7 +95,6 @@ const addProduct = () => {
 
 const renderProduct = (arrProd) => {
     // console.log('Render..... ', ...arrProd )
-    // const arrayProd = arrProd  //
     const html = arrProd.map((element) => {
         return (`<tr>
                     <th scope="row" class="text-center"><strong>${element.id}</strong></th>

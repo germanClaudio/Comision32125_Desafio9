@@ -8,39 +8,39 @@ module.exports = class ContainerMsg {
 
     async readFile() {
         try {
-          const content = await fs.promises.readFile(this.myFile, "utf-8");
-        //   console.log("Content msgs: " + content)
+          const content = await fs.promises.readFile(this.myFile, "utf-8")
           const contentParsed = JSON.parse(content)
-          return contentParsed;
+          return contentParsed
         } catch (error) {
-          console.error("Error leer archivo: " + error);
+          console.error("Error leer archivo: " + error)
         }
       }
-
 
     async getAllMsg() {
         const fileContent = await this.readFile()
         try {
             if (fileContent.length !== 0) {
-            return fileContent;
+            return fileContent
             } else {
-            console.log("Lo sentimos, la lista de mensajes está vacía!!!");
+            console.log("Lo sentimos, la lista de mensajes está vacía!!!")
             }
         } catch (error) {
-            console.error(`Error getting all messages ${error}`);
+            console.error(`Error getting all messages ${error}`)
         }
     }
    
     async saveMsg(addMessage) {
-        const fileContent = await this.myFile
+        const fileContent = await this.readFile()
         // console.log('Dentro del saveProduct: '+ JSON.stringify(addMessage))
         if (addMessage !== undefined) {
-            const messageToSave = JSON.stringify([...fileContent, addMessage], null, 2)
-            
             try {
-                this.myFile = fs.promises.writeFile(this.myFile, messageToSave)
-                return messageToSave
-
+                await fs.promises.writeFile(
+                    this.myFile,
+                  JSON.stringify([...fileContent, { ...addMessage, id: fileContent[fileContent.length - 1].id + 1} ], null, 2)
+                )
+                console.log("Mensaje guardado en Base de Datos!", fileContent)
+                return fileContent
+                
             } catch (error) {
                 console.log(error)
                 return { Error: 'Upps! Hubo un error y no pudimos guardar el Mensaje.' }

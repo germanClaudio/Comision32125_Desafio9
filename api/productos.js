@@ -10,7 +10,7 @@ class ApiProductosMock extends ContainerArchivo {
    async popular(cant = 5) {
        const nuevos = []
        for (let i = 0; i < cant; i++) {
-           const nuevoProducto = generarProducto()
+           const nuevoProducto = generarProducto(i)
            const guardado = await this.createProduct(nuevoProducto)
            nuevos.push(guardado)
         }

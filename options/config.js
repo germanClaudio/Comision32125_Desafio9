@@ -11,7 +11,8 @@ const options = {
 
   },
   filePath: {
-    path: './DB/productos.json'
+    path: './DB/productos.json',
+    pathMsg: './DB/messages.json'
   },
   sqlite: {
     client: 'sqlite3',

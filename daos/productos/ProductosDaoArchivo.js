@@ -32,7 +32,7 @@ class ProductosDaoArchivo extends ContainerArchivo {
 
   async createProduct(obj) {
     const fileContent = await this.readFile()
-    console.log(fileContent)
+    //console.log(fileContent)
     if (fileContent.length !== 0) {
       try {
         await fs.promises.writeFile(
