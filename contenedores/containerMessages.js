@@ -38,7 +38,7 @@ module.exports = class ContainerMsg {
                     this.myFile,
                   JSON.stringify([...fileContent, { ...addMessage, id: fileContent[fileContent.length - 1].id + 1} ], null, 2)
                 )
-                console.log("Mensaje guardado en Base de Datos!", fileContent)
+                // console.log("Mensaje guardado en Base de Datos!", fileContent)
                 return fileContent
                 
             } catch (error) {

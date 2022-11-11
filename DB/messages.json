@@ -102,5 +102,18 @@
     "text": "Me fui a la B!! Nooo.",
     "fyh": "11/11/2022, 16:40:44",
     "id": 8
+  },
+  {
+    "author": {
+      "email": "redondo@gmail.com",
+      "nombre": "Jijiji",
+      "apellido": "Redondo",
+      "edad": "49",
+      "alias": "Red",
+      "avatar": "https://cloudflare-ipfs.com/ipfs/Qmd3W5DuhgHirLHGVixi6V76LhCkZUz6pnFt5AJBiyvHye/avatar/858.jpg"
+    },
+    "text": "Jajajajaja",
+    "fyh": "11/11/2022, 16:48:20",
+    "id": 9
   }
 ]

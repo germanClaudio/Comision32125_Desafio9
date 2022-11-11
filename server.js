@@ -62,11 +62,6 @@ io.on('connection', async (socket) => {
     // Messages --------------------------
     socket.emit('mensajesAll', await listarMensajesNormalizados())//containerMsg.getAllMsg() ) 
 
-    // socket.on('newMensaje', async message => {
-    // //containerMsg.saveMsg(message)   //const arrayMens = await containerMsg.saveMsg(message)
-    //    io.sockets.emit('mensajesAll', await containerMsg.getAllMsg())
-    // })
-
     socket.on('newMensaje', async message => {
         //mensaje.fyh = new Date().toLocaleString()
         message.fyh = new Date().toLocaleString()
