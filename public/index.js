@@ -1,24 +1,22 @@
 const socket = io.connect()
-//console.log('socketIO')
+const { normalizar, denormalize, schema } = require('normalizr')
 
 // ----------  Messages ----------------
 socket.on('mensajesAll', async (data) => {
-    console.log('Data mensaje: ' + data )
-    // socket.emit('respuesta', { socketID: data.id, mensaje: data } )
+    //console.log('Data mensaje: ' + data )
     render( await data)
 })
 
 const addMessage = () => {
-    const user = document.getElementById('author').value
-    const message = document.getElementById('texto').value
+    const author = document.getElementById('author').value
+    const text = document.getElementById('texto').value
     const nombre = document.getElementById('nombre').value
     const apellido = document.getElementById('apellido').value
     const edad = document.getElementById('edad').value
     const alias = document.getElementById('alias').value
     const avatar = document.getElementById('avatar').value
-    const date = new Date().toLocaleString('en-GB')
-    // console.log(text, author, date)
-    socket.emit('newMensaje', { user, message, date, nombre, apellido, edad, alias, avatar })
+    
+    socket.emit('newMensaje', { author, nombre, apellido, edad, alias, avatar, text })
 
     return false
 }

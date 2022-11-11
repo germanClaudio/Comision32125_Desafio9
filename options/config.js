@@ -16,7 +16,7 @@ const options = {
   sqlite: {
     client: 'sqlite3',
     connection: {
-    filename: './DB/messages.json'
+    filePath: './DB/messages.json'
     },
     useNullAsDefault: true
 }

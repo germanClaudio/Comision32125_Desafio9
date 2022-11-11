@@ -13,7 +13,7 @@ const httpServer = new HttpServer(app)
 const io = new IOServer(httpServer)
 
 const ContainerMessages = require('./contenedores/containerMessages.js')
-const containerMsg = new ContainerMessages('messages', options.sqlite.connection.filename )
+const containerMsg = new ContainerMessages(options.sqlite.connection.filePath)
 
 const ContainerProducts = require('./daos/productos/ProductosDaoArchivo.js')
 const containerProduct = new ContainerProducts(options.filePath.path) 
@@ -40,6 +40,9 @@ app.use('/', productosRouter)
 httpServer.listen(PORT, () => {
     console.log(`SERVER listen on port ${PORT}`)
 })
+
+
+
 
 io.on('connection', async (socket) => {
     // "connection" se ejecuta la primera vez que se abre una nueva conexión
