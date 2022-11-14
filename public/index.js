@@ -12,17 +12,17 @@ const schemaMensaje = new normalizr.schema.Entity('post', { author: schemaAuthor
 const schemaMensajes = new normalizr.schema.Entity('posts', { mensajes: [ schemaMensaje ] }, { idAttribute: 'id' })
 
 socket.on('mensajesAll', async (mensajes) => {   //async (data)
-    console.log('Data mensaje: ' + JSON.stringify(mensajes))
+    //console.log('Data mensaje: ' + JSON.stringify(mensajes))
     let mensajesNsize = JSON.stringify(mensajes).length
-    console.log(mensajes, mensajesNsize);
+    //console.log(mensajes, mensajesNsize);
 
     let mensajesD = normalizr.denormalize(mensajes.result, schemaMensajes, mensajes.entities)
 
     let mensajesDsize = JSON.stringify(mensajesD).length
-    console.log(mensajesD, mensajesDsize);
+    //console.log(mensajesD, mensajesDsize);
 
     let porcentajeC = parseInt((mensajesNsize * 100) / mensajesDsize)
-    console.log(`Porcentaje de compresión ${porcentajeC}%`)
+    //console.log(`Porcentaje de compresión ${porcentajeC}%`)
     document.getElementById('compressionRate').innerText = `Compression Rate: ${porcentajeC}%`
 
     const html = makeHtmlList(mensajesD.mensajes)
